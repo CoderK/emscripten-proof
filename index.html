@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emscripten Test</title>
+</head>
+<body>
+
+<input type="file" name="images" id="fileForm">
+
+<script src="api.js"></script>
+<script>
+    const fileReader = new FileReader();
+
+    fileReader.onload = (e) => {
+        const binaryString = e.target.result;
+        const buf = new ArrayBuffer(binaryString.length * 2);
+        const bufView = new Uint8Array(buf);
+
+        for (let i = 0, strLen = binaryString.length; i < strLen; i++) {
+            bufView[i] = binaryString.charCodeAt(i);
+        }
+
+        const ptr = Module._malloc(8);
+        const printArray = Module.cwrap("print_array", "number", ["number", "number"]);
+
+        Module.writeArrayToMemory(bufView, ptr);
+
+        setTimeout(() => {
+            printArray(ptr, bufView.length);
+            Module._free(ptr);
+        }, 0);
+    };
+
+    document
+        .querySelector("#fileForm")
+        .addEventListener("change", (e) => {
+            const file = e.target.files[0];
+            fileReader.readAsBinaryString(file);
+        });
+</script>
+
+</body>
+</html>
