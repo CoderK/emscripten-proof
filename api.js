@@ -5858,64 +5858,6 @@ function getTempRet0() {
   return tempRet0|0;
 }
 
-function _modify_array($X) {
- $X = $X|0;
- var $0 = 0, $1 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $i = 0, label = 0, sp = 0;
- sp = STACKTOP;
- STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abort();
- $0 = $X;
- $i = 0;
- while(1) {
-  $1 = $i;
-  $2 = ($1|0)<(8);
-  if (!($2)) {
-   break;
-  }
-  $3 = $i;
-  $4 = $0;
-  $5 = (($4) + ($3<<2)|0);
-  $6 = HEAP32[$5>>2]|0;
-  $7 = (($6) + 1)|0;
-  HEAP32[$5>>2] = $7;
-  $8 = $i;
-  $9 = (($8) + 1)|0;
-  $i = $9;
- }
- STACKTOP = sp;return;
-}
-function _sum($ptr,$length) {
- $ptr = $ptr|0;
- $length = $length|0;
- var $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $2 = 0, $3 = 0, $4 = 0, $5 = 0, $6 = 0, $7 = 0, $8 = 0, $9 = 0, $i = 0, $sum = 0, label = 0, sp = 0;
- sp = STACKTOP;
- STACKTOP = STACKTOP + 16|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abort();
- $0 = $ptr;
- $1 = $length;
- $sum = 0;
- $i = 0;
- while(1) {
-  $2 = $i;
-  $3 = $1;
-  $4 = ($2|0)<($3|0);
-  if (!($4)) {
-   break;
-  }
-  $5 = $0;
-  $6 = HEAP8[$5>>0]|0;
-  $7 = $6 << 24 >> 24;
-  $8 = $sum;
-  $9 = (($8) + ($7))|0;
-  $sum = $9;
-  $10 = $0;
-  $11 = ((($10)) + 1|0);
-  $0 = $11;
-  $12 = $i;
-  $13 = (($12) + 1)|0;
-  $i = $13;
- }
- $14 = $sum;
- STACKTOP = sp;return ($14|0);
-}
 function _print_array($ptr,$length) {
  $ptr = $ptr|0;
  $length = $length|0;
@@ -5944,6 +5886,110 @@ function _print_array($ptr,$length) {
   $10 = $i;
   $11 = (($10) + 1)|0;
   $i = $11;
+ }
+ STACKTOP = sp;return;
+}
+function _SepiaFilter($image_data,$image_width,$image_height) {
+ $image_data = $image_data|0;
+ $image_width = $image_width|0;
+ $image_height = $image_height|0;
+ var $0 = 0, $1 = 0, $10 = 0, $11 = 0, $12 = 0, $13 = 0, $14 = 0, $15 = 0, $16 = 0, $17 = 0, $18 = 0, $19 = 0, $2 = 0, $20 = 0, $21 = 0, $22 = 0, $23 = 0, $24 = 0, $25 = 0, $26 = 0;
+ var $27 = 0, $28 = 0, $29 = 0, $3 = 0, $30 = 0, $31 = 0, $32 = 0, $33 = 0, $34 = 0, $35 = 0, $36 = 0, $37 = 0, $38 = 0, $39 = 0, $4 = 0, $40 = 0, $41 = 0, $42 = 0, $43 = 0, $44 = 0;
+ var $45 = 0, $46 = 0, $47 = 0, $48 = 0, $49 = 0, $5 = 0, $50 = 0, $51 = 0, $52 = 0, $53 = 0, $54 = 0, $55 = 0, $56 = 0, $57 = 0, $58 = 0, $59 = 0, $6 = 0, $60 = 0, $61 = 0, $62 = 0;
+ var $63 = 0, $64 = 0, $65 = 0, $66 = 0, $67 = 0, $68 = 0, $69 = 0, $7 = 0, $70 = 0, $71 = 0, $72 = 0, $8 = 0, $9 = 0, $end = 0, $ib = 0, $ig = 0, $ir = 0, $ob = 0, $og = 0, $or = 0;
+ var $px = 0, label = 0, sp = 0;
+ sp = STACKTOP;
+ STACKTOP = STACKTOP + 48|0; if ((STACKTOP|0) >= (STACK_MAX|0)) abort();
+ $0 = $image_data;
+ $1 = $image_width;
+ $2 = $image_height;
+ $3 = $0;
+ $px = $3;
+ $4 = $px;
+ $5 = $1;
+ $6 = $2;
+ $7 = Math_imul($5, $6)|0;
+ $8 = (($4) + ($7<<2)|0);
+ $end = $8;
+ while(1) {
+  $9 = $px;
+  $10 = $end;
+  $11 = ($9>>>0)<($10>>>0);
+  if (!($11)) {
+   break;
+  }
+  $12 = $px;
+  $13 = HEAP32[$12>>2]|0;
+  $14 = $13 & 16711680;
+  $15 = $14 >>> 16;
+  $ir = $15;
+  $16 = $px;
+  $17 = HEAP32[$16>>2]|0;
+  $18 = $17 & 65280;
+  $19 = $18 >>> 8;
+  $ig = $19;
+  $20 = $px;
+  $21 = HEAP32[$20>>2]|0;
+  $22 = $21 & 255;
+  $ib = $22;
+  $23 = $ir;
+  $24 = ($23*402)|0;
+  $25 = $ig;
+  $26 = ($25*787)|0;
+  $27 = (($24) + ($26))|0;
+  $28 = $ib;
+  $29 = ($28*194)|0;
+  $30 = (($27) + ($29))|0;
+  $31 = $30 >>> 10;
+  $or = $31;
+  $32 = $ir;
+  $33 = ($32*357)|0;
+  $34 = $ig;
+  $35 = ($34*702)|0;
+  $36 = (($33) + ($35))|0;
+  $37 = $ib;
+  $38 = ($37*172)|0;
+  $39 = (($36) + ($38))|0;
+  $40 = $39 >>> 10;
+  $og = $40;
+  $41 = $ir;
+  $42 = ($41*279)|0;
+  $43 = $ig;
+  $44 = ($43*547)|0;
+  $45 = (($42) + ($44))|0;
+  $46 = $ib;
+  $47 = ($46*134)|0;
+  $48 = (($45) + ($47))|0;
+  $49 = $48 >>> 10;
+  $ob = $49;
+  $50 = $or;
+  $51 = ($50>>>0)>(255);
+  $52 = $or;
+  $53 = $51 ? 255 : $52;
+  $or = $53;
+  $54 = $og;
+  $55 = ($54>>>0)>(255);
+  $56 = $og;
+  $57 = $55 ? 255 : $56;
+  $og = $57;
+  $58 = $ob;
+  $59 = ($58>>>0)>(255);
+  $60 = $ob;
+  $61 = $59 ? 255 : $60;
+  $ob = $61;
+  $62 = $or;
+  $63 = $62 << 16;
+  $64 = -16777216 | $63;
+  $65 = $og;
+  $66 = $65 << 8;
+  $67 = $64 | $66;
+  $68 = $ob;
+  $69 = $67 | $68;
+  $70 = $px;
+  HEAP32[$70>>2] = $69;
+  $71 = $px;
+  $72 = ((($71)) + 4|0);
+  $px = $72;
  }
  STACKTOP = sp;return;
 }
@@ -13074,7 +13120,7 @@ var FUNCTION_TABLE_ii = [b0,___stdio_close];
 var FUNCTION_TABLE_iiii = [b1,b1,___stdout_write,___stdio_seek,b1,___stdio_write,b1,b1];
 var FUNCTION_TABLE_vi = [b2,b2,b2,b2,_cleanup392,b2,b2,b2];
 
-  return { _i64Subtract: _i64Subtract, _fflush: _fflush, _print_array: _print_array, _i64Add: _i64Add, _memset: _memset, _malloc: _malloc, _memcpy: _memcpy, _sum: _sum, _modify_array: _modify_array, _bitshift64Lshr: _bitshift64Lshr, _free: _free, ___errno_location: ___errno_location, _bitshift64Shl: _bitshift64Shl, runPostSets: runPostSets, stackAlloc: stackAlloc, stackSave: stackSave, stackRestore: stackRestore, establishStackSpace: establishStackSpace, setThrew: setThrew, setTempRet0: setTempRet0, getTempRet0: getTempRet0, dynCall_ii: dynCall_ii, dynCall_iiii: dynCall_iiii, dynCall_vi: dynCall_vi };
+  return { _i64Subtract: _i64Subtract, _fflush: _fflush, _print_array: _print_array, _i64Add: _i64Add, _memset: _memset, _malloc: _malloc, _memcpy: _memcpy, _bitshift64Lshr: _bitshift64Lshr, _free: _free, _SepiaFilter: _SepiaFilter, ___errno_location: ___errno_location, _bitshift64Shl: _bitshift64Shl, runPostSets: runPostSets, stackAlloc: stackAlloc, stackSave: stackSave, stackRestore: stackRestore, establishStackSpace: establishStackSpace, setThrew: setThrew, setTempRet0: setTempRet0, getTempRet0: getTempRet0, dynCall_ii: dynCall_ii, dynCall_iiii: dynCall_iiii, dynCall_vi: dynCall_vi };
 })
 // EMSCRIPTEN_END_ASM
 (Module.asmGlobalArg, Module.asmLibraryArg, buffer);
@@ -13108,18 +13154,6 @@ assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it a
 return real__malloc.apply(null, arguments);
 };
 
-var real__sum = asm["_sum"]; asm["_sum"] = function() {
-assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real__sum.apply(null, arguments);
-};
-
-var real__modify_array = asm["_modify_array"]; asm["_modify_array"] = function() {
-assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real__modify_array.apply(null, arguments);
-};
-
 var real__bitshift64Lshr = asm["_bitshift64Lshr"]; asm["_bitshift64Lshr"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
@@ -13130,6 +13164,12 @@ var real__free = asm["_free"]; asm["_free"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
 return real__free.apply(null, arguments);
+};
+
+var real__SepiaFilter = asm["_SepiaFilter"]; asm["_SepiaFilter"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real__SepiaFilter.apply(null, arguments);
 };
 
 var real____errno_location = asm["___errno_location"]; asm["___errno_location"] = function() {
@@ -13151,10 +13191,9 @@ var _i64Add = Module["_i64Add"] = asm["_i64Add"];
 var _memset = Module["_memset"] = asm["_memset"];
 var _malloc = Module["_malloc"] = asm["_malloc"];
 var _memcpy = Module["_memcpy"] = asm["_memcpy"];
-var _sum = Module["_sum"] = asm["_sum"];
-var _modify_array = Module["_modify_array"] = asm["_modify_array"];
 var _bitshift64Lshr = Module["_bitshift64Lshr"] = asm["_bitshift64Lshr"];
 var _free = Module["_free"] = asm["_free"];
+var _SepiaFilter = Module["_SepiaFilter"] = asm["_SepiaFilter"];
 var ___errno_location = Module["___errno_location"] = asm["___errno_location"];
 var _bitshift64Shl = Module["_bitshift64Shl"] = asm["_bitshift64Shl"];
 var dynCall_ii = Module["dynCall_ii"] = asm["dynCall_ii"];

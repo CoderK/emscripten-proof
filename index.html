@@ -7,9 +7,11 @@
 <body>
 
 <input type="file" name="images" id="fileForm">
+<img id="image" src="" width="510" height="655">
 
 <script src="api.js"></script>
 <script>
+    const imageElement = document.querySelector("#image");
     const fileReader = new FileReader();
 
     fileReader.onload = (e) => {
@@ -21,15 +23,21 @@
             bufView[i] = binaryString.charCodeAt(i);
         }
 
+        imageElement.src = URL.createObjectURL(new Blob([bufView], {type: "image/jpeg"}));
+
+        const filterWithSepia = Module.cwrap("SepiaFilter", "number", ["number", "number", "number"]);
+        const width = imageElement.width;
+        const height = imageElement.height;
         const ptr = Module._malloc(8);
-        const printArray = Module.cwrap("print_array", "number", ["number", "number"]);
 
         Module.writeArrayToMemory(bufView, ptr);
+        filterWithSepia(ptr, width, height);
 
-        setTimeout(() => {
-            printArray(ptr, bufView.length);
-            Module._free(ptr);
-        }, 0);
+        for (let i = 0, strLen = binaryString.length; i < strLen; i++) {
+            bufView[i] = Module.getValue(ptr + (i));
+        }
+        imageElement.src = URL.createObjectURL(new Blob([bufView], {type: "image/jpeg"}));
+//        Module._free(ptr);
     };
 
     document
